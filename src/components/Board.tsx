@@ -1,5 +1,6 @@
 import React from 'react';
 import { DiceType } from './TenziesGame';
+import { XCircle } from 'phosphor-react';
 
 interface BoardProps {
     diceList: DiceType[];
@@ -40,10 +41,10 @@ const Board = ({
             <li
                 onClick={handleCloseClick}
                 className={
-                    'cursor-pointer absolute top-0 right-0 w-5 h-5 translate-x-8 -translate-y-6'
+                    'cursor-pointer absolute top-0 right-0 w-5 h-5 translate-x-6 -translate-y-8 transition'
                 }
             >
-                <img src={'./assets/2circle.svg'} alt={'close btn'}/>
+                <XCircle size={28} color={'#4F46E5'} />
             </li>
             {diceList.map((item, index) => (
                 <Cube

@@ -88,7 +88,7 @@ const TenziesGame = () => {
                 />
                 <button
                     className={
-                        'border-2 border-indigo-600 text-indigo-600 hover:text-white hover:bg-indigo-600 text-white font-bold px-8 py-2 rounded active:bg-indigo-500 transition'
+                        'border-2 border-indigo-600 text-indigo-600 hover:text-white hover:bg-indigo-600 px-8 py-2 rounded active:bg-indigo-500 transition'
                     }
                     onClick={handleButtonClick}
                 >
