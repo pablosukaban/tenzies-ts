@@ -1,4 +1,9 @@
 import React from 'react';
+import { DiceType } from './TenziesGame';
+
+interface BoardProps {
+    diceList: DiceType[];
+}
 
 const Cube = ({ num }: { num: number }) => {
     return (
@@ -12,12 +17,11 @@ const Cube = ({ num }: { num: number }) => {
     );
 };
 
-const Board = () => {
-    const arr = Array(10).fill(1);
+const Board = ({ diceList }: BoardProps) => {
     return (
         <ul className={'grid grid-cols-5 gap-2'}>
-            {arr.map((item, index) => (
-                <Cube key={index} num={item} />
+            {diceList.map((item, index) => (
+                <Cube key={item.id} num={item.value} />
             ))}
         </ul>
     );
