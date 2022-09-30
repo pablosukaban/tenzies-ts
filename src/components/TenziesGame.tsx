@@ -30,10 +30,10 @@ function makeBoardValues() {
 const TenziesGame = () => {
     const [diceList, setDiceList] = useState(makeBoardValues());
 
-    console.log(diceList);
-
     const handleButtonClick = () => {
-        setDiceList(makeBoardValues());
+        const newBoard = makeBoardValues()
+        const filtered = diceList.map(item => item.isPressed ? item : getDiceItem())
+        setDiceList(filtered);
     };
 
     const handleDiceClick = (id: string) => {
