@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Board from './Board';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -29,11 +29,18 @@ function makeBoardValues() {
 
 const TenziesGame = () => {
     const [diceList, setDiceList] = useState(makeBoardValues());
+    const [tenzies, setTenzies] = useState(false);
 
     const handleButtonClick = () => {
-        const newBoard = makeBoardValues()
-        const filtered = diceList.map(item => item.isPressed ? item : getDiceItem())
-        setDiceList(filtered);
+        if (tenzies) {
+            setDiceList(makeBoardValues());
+            setTenzies(false);
+        } else {
+            const filtered = diceList.map((item) =>
+                item.isPressed ? item : getDiceItem()
+            );
+            setDiceList(filtered);
+        }
     };
 
     const handleDiceClick = (id: string) => {
@@ -42,6 +49,21 @@ const TenziesGame = () => {
         );
         setDiceList(newList);
     };
+
+    const handleCloseClick = () => {
+        const notPressed = diceList.map((item) => ({
+            ...item,
+            isPressed: false,
+        }));
+        setDiceList(notPressed);
+    };
+
+    useEffect(() => {
+        const someVal = diceList[0].value;
+        const allPressed = diceList.every((item) => item.isPressed === true);
+        const allEqual = diceList.every((item) => item.value === someVal);
+        if (allPressed && allEqual) setTenzies(true);
+    }, [diceList]);
 
     return (
         <div>
@@ -57,14 +79,19 @@ const TenziesGame = () => {
                         freeze it at its current value between rolls.
                     </p>
                 </div>
-                <Board diceList={diceList} onDiceClick={handleDiceClick} />
+                <Board
+                    tenzies={tenzies}
+                    diceList={diceList}
+                    onDiceClick={handleDiceClick}
+                    handleCloseClick={handleCloseClick}
+                />
                 <button
                     className={
-                        ' bg-indigo-600 text-white font-bold px-8 py-2 rounded '
+                        'border-2 border-indigo-600 text-indigo-600 hover:text-white hover:bg-indigo-600 text-white font-bold px-8 py-2 rounded active:bg-indigo-500 transition'
                     }
                     onClick={handleButtonClick}
                 >
-                    Roll
+                    {tenzies ? 'New game' : 'Reroll'}
                 </button>
             </div>
         </div>

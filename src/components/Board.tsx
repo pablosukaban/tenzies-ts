@@ -4,20 +4,24 @@ import { DiceType } from './TenziesGame';
 interface BoardProps {
     diceList: DiceType[];
     onDiceClick: (id: string) => void;
+    tenzies: boolean;
+    handleCloseClick: () => void;
 }
 
 const Cube = ({
     item,
     onDiceClick,
+    tenzies,
 }: {
     item: DiceType;
     onDiceClick: (id: string) => void;
+    tenzies: boolean;
 }) => {
     return (
         <div
             className={`py-3 px-4 border rounded shadow cursor-pointer font-bold text-center text-lg  transition ${
-                item.isPressed && 'bg-green-300'
-            }`}
+                tenzies && 'disabled:pointer-events-none'
+            } ${item.isPressed && 'bg-green-300'}`}
             onClick={() => onDiceClick(item.id)}
         >
             {item.value}
@@ -25,11 +29,29 @@ const Cube = ({
     );
 };
 
-const Board = ({ diceList, onDiceClick }: BoardProps) => {
+const Board = ({
+    diceList,
+    onDiceClick,
+    tenzies,
+    handleCloseClick,
+}: BoardProps) => {
     return (
-        <ul className={'grid grid-cols-5 gap-2'}>
+        <ul className={'grid grid-cols-5 gap-2 relative'}>
+            <li
+                onClick={handleCloseClick}
+                className={
+                    'cursor-pointer absolute top-0 right-0 w-5 h-5 translate-x-8 -translate-y-6'
+                }
+            >
+                <img src={'assets/2circle.svg'} />
+            </li>
             {diceList.map((item, index) => (
-                <Cube key={item.id} item={item} onDiceClick={onDiceClick} />
+                <Cube
+                    tenzies={tenzies}
+                    key={item.id}
+                    item={item}
+                    onDiceClick={onDiceClick}
+                />
             ))}
         </ul>
     );
