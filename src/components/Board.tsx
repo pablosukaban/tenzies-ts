@@ -20,8 +20,8 @@ const Cube = ({
 }) => {
     return (
         <div
-            className={`py-3 px-4 border rounded shadow cursor-pointer font-bold text-center text-lg  transition ${
-                tenzies && 'disabled:pointer-events-none'
+            className={`py-3 px-4 border rounded shadow cursor-pointer font-bold text-center text-lg transition ${
+                tenzies && 'pointer-events-none cursor-not-allowed'
             } ${item.isPressed && 'bg-green-300'}`}
             onClick={() => onDiceClick(item.id)}
         >

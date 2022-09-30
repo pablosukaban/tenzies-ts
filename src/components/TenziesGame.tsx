@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Board from './Board';
+import Confetti from 'react-confetti';
 import { v4 as uuidv4 } from 'uuid';
 
 export type DiceType = {
@@ -51,6 +52,7 @@ const TenziesGame = () => {
     };
 
     const handleCloseClick = () => {
+        if (tenzies) return;
         const notPressed = diceList.map((item) => ({
             ...item,
             isPressed: false,
@@ -65,8 +67,12 @@ const TenziesGame = () => {
         if (allPressed && allEqual) setTenzies(true);
     }, [diceList]);
 
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
     return (
         <div>
+            {tenzies && <Confetti width={width} height={height} />}
             <div
                 className={
                     'flex flex-col justify-center items-center gap-6 p-10 max-w-xs rounded shadow-xl'
