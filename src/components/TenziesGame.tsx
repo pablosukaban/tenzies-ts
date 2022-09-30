@@ -75,8 +75,9 @@ const TenziesGame = () => {
                 <div className={'text-center'}>
                     <h1 className={'text-4xl font-bold'}>Tenzies</h1>
                     <p className={'text-center text-sm'}>
-                        Roll until all dice are the same. Click each die to
-                        freeze it at its current value between rolls.
+                        Бросайте до тех пор, пока все кубики не станут
+                        одинаковыми. Нажмите на каждый кубик, чтобы заморозить
+                        его текущее значение между бросками.
                     </p>
                 </div>
                 <Board
@@ -91,7 +92,7 @@ const TenziesGame = () => {
                     }
                     onClick={handleButtonClick}
                 >
-                    {tenzies ? 'New game' : 'Reroll'}
+                    {tenzies ? 'Новая игра' : 'Бросить еще раз'}
                 </button>
             </div>
         </div>

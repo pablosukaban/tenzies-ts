@@ -43,7 +43,7 @@ const Board = ({
                     'cursor-pointer absolute top-0 right-0 w-5 h-5 translate-x-8 -translate-y-6'
                 }
             >
-                <img src={'assets/2circle.svg'} />
+                <img src={'./assets/2circle.svg'} alt={'close btn'}/>
             </li>
             {diceList.map((item, index) => (
                 <Cube
