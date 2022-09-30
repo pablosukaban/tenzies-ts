@@ -30,9 +30,19 @@ function makeBoardValues() {
 const TenziesGame = () => {
     const [diceList, setDiceList] = useState(makeBoardValues());
 
+    console.log(diceList);
+
     const handleButtonClick = () => {
         setDiceList(makeBoardValues());
     };
+
+    const handleDiceClick = (id: string) => {
+        const newList = diceList.map((item) =>
+            item.id === id ? { ...item, isPressed: !item.isPressed } : item
+        );
+        setDiceList(newList);
+    };
+
     return (
         <div>
             <div
@@ -47,7 +57,7 @@ const TenziesGame = () => {
                         freeze it at its current value between rolls.
                     </p>
                 </div>
-                <Board diceList={diceList} />
+                <Board diceList={diceList} onDiceClick={handleDiceClick} />
                 <button
                     className={
                         ' bg-indigo-600 text-white font-bold px-8 py-2 rounded '
